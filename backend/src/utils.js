@@ -35,3 +35,17 @@ export const updateClients = async (client, id) => {
 }
 
 export const send = (res, status, payload) => res.status(status).json(payload);
+
+export const calculateSummary = (clients) => {
+    return clients.reduce((acc, client) => {
+        if (client.projects.length >= 1) {
+            client.projects.forEach(project => {
+                acc.totalProjects += 1;
+                acc.totalPLN += project.valuePLN;
+            });
+        }
+        return acc;
+    },
+        { totalProjects: 0, totalPLN: 0 }
+    );
+}
