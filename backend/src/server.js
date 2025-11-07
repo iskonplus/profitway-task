@@ -11,6 +11,12 @@ const PORT = process.env.PORT || 5454;
 
 app.use(cors());
 app.use(express.json());
+app.use((err, _req, res, next) => {
+  if (err instanceof SyntaxError) {
+    return send(res, 400, { message: errorMsg.invalid.json });
+  }
+  next();
+});
 
 app.use('/api/clients', clientsRouter);
 app.use('/api/summary', summaryRouter);
