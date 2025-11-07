@@ -1,18 +1,42 @@
 {
   "clients": [
     {
-      "id": "5760eab9-d0d0-4329-9dd6-b3fa7c3cdf56",
-      "name": "Dima",
-      "email": "tt@tt.tt",
+      "id": "74cda85c-87a7-4dc3-b31d-8e37f01dc9dc",
+      "name": "Acme Sp. z o.o.",
+      "email": "kontakt@acme.pl",
       "acquiredAt": "2025-11-07",
-      "projects": []
-    },
-    {
-      "id": "ef0e9dae-677c-4831-a555-242520ccab07",
-      "name": "Artur",
-      "email": "tt@tt.tt",
-      "acquiredAt": "2025-11-07",
-      "projects": []
+      "projects": [
+        {
+          "id": "50980d95-bdf0-4a04-b5f7-27d1d96e9867",
+          "name": "Landing Page Redesign",
+          "status": "in progress",
+          "valuePLN": 7200
+        },
+        {
+          "id": "762cfcbc-24be-4f1b-a20d-0a3c41bab947",
+          "name": "Test",
+          "status": "done",
+          "valuePLN": 200
+        },
+        {
+          "id": "583450db-a3a8-40c8-9d99-8f1ffbfad201",
+          "name": "Test",
+          "status": "done",
+          "valuePLN": 200
+        },
+        {
+          "id": "ac497fb4-7242-48df-b579-deddeaa87186",
+          "name": "2222",
+          "status": "done",
+          "valuePLN": 222222
+        },
+        {
+          "id": "58ea608a-0474-419a-899b-84ca78d63b47",
+          "name": "5555",
+          "status": "done",
+          "valuePLN": 55555
+        }
+      ]
     }
   ]
 }
