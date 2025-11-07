@@ -1,5 +1,7 @@
+.vscode
 # dependencies
 node_modules/
+.env
 
 # builds
 dist/
