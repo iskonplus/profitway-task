@@ -1,4 +1,5 @@
 .vscode
+clientDataExample.js
 # dependencies
 node_modules/
 .env
