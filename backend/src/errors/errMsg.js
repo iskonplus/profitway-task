@@ -6,7 +6,7 @@ export const errorMsg = {
     },
     notFound: {
         client: 'Client not found',
-        url: 'Url not found'
+        url: 'URL not found'
     },
     server: {
         internal: 'Internal Server Error',

@@ -32,7 +32,6 @@ export const createClientProject = async (name, status, valuePLN) => {
 export const updateClients = async (client, id) => {
     const db = await readDB();
     return db.clients.map(clientDb => clientDb.id === id ? client : clientDb);
-
 }
 
 export const send = (res, status, payload) => res.status(status).json(payload);
