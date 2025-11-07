@@ -1,1 +1,18 @@
-{ "clients": [] }
+{
+  "clients": [
+    {
+      "id": "5760eab9-d0d0-4329-9dd6-b3fa7c3cdf56",
+      "name": "Dima",
+      "email": "tt@tt.tt",
+      "acquiredAt": "2025-11-07",
+      "projects": []
+    },
+    {
+      "id": "ef0e9dae-677c-4831-a555-242520ccab07",
+      "name": "Artur",
+      "email": "tt@tt.tt",
+      "acquiredAt": "2025-11-07",
+      "projects": []
+    }
+  ]
+}

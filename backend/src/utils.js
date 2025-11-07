@@ -6,7 +6,12 @@ export const findAllClients = async () => {
     return clients;
 };
 
-export const createClient = async (name, email) => {
+export const getClient = async (id) => {
+    const { clients } = await readDB();
+    return clients.find(client => client.id === id);
+}
+
+export const createClientModel = async (name, email) => {
     return {
         id: randomUUID(),
         name, email,
