@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { getClients } from './api/api';
 import ClientsList from './components/ClientList';
 import Loader from './components/Loader';
+import ErrorMessage from './components/ErrorMsg';
 
 
 export default function App() {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const title = 'Mini CRM';
 
   useEffect(() => {
@@ -14,9 +16,10 @@ export default function App() {
       try {
         const data = await getClients();
         setClients(data);
+        //  throw new Error('Failed to load clients!');
 
       } catch (err) {
-        console.error(err.message);
+        setError(err.message || 'Failed to load clients');
       } finally {
         setLoading(false);
       }
@@ -28,7 +31,7 @@ export default function App() {
     <main className="max-w-6xl m-2">
       <h1 className="text-2xl font-bold text-center mb-2">{title}</h1>
       <div className="border-t bg-white shadow-md rounded-lg p-6 max-w-3xl w-full space-y-6 m-auto">
-
+        <ErrorMessage message={error} />
         {loading && <Loader />}
         {!loading && <ClientsList clients={clients} />}
 
