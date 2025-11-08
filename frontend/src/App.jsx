@@ -1,12 +1,26 @@
-function App() {
-  return (
-    <div className="min-h-screen bg-slate-100 flex items-center justify-center flex-col">
+import { useState, useEffect } from 'react';
+import { getClients } from './api/api';
 
-      <h1 className="text-2xl font-bold">Mini CRM</h1>
-      <p className="text-gray-800">Hello Tailwind! </p>
 
-    </div>
-  );
+export default function App() {
+  const [clients, setClients] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await getClients();
+        setClients(data);
+      } catch (err) {
+        console.error(err.message);
+      } finally {
+        console.log('finally');
+      }
+    })();
+  }, []);
+
+  console.log(clients);
+
+
 }
 
-export default App;
+
