@@ -9,3 +9,20 @@ export async function getClients() {
 
   return res.json();
 }
+
+export async function createClient(payload) {
+    
+  const res = await fetch(`${API_BASE}/clients`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    throw new Error('Failed to create client');
+  }
+
+  return res.json();
+}
