@@ -26,7 +26,7 @@ export default function ClientItem({
                     <InfoRow label="Email:" value={client.email} />
                 </div>
 
-                <div className="text-right sm:text-left">
+                <div className="text-right sm:text-right">
                     {client.acquiredAt && (
                         <p className="text-xs text-gray-400">{client.acquiredAt}</p>
                     )}
