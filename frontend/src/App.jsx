@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
-import { getClients } from './api/api';
+import { getClients, createClient } from './api/api';
 import ClientsList from './components/ClientList';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMsg';
-import AddClientBtn from './components/AddClient'
+import AddClientBtn from './components/AddClientBtn'
+import Modal from './components/Modal';
+import ClientForm from './components/ClientForm'
 
 
 export default function App() {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const title = 'Mini CRM';
 
   useEffect(() => {
@@ -26,6 +29,12 @@ export default function App() {
     })();
   }, []);
 
+  const handleCreateClient = async (payload) => {
+    const created = await createClient(payload);
+    setClients((prev) => [created, ...prev]);
+    setIsModalOpen(false);
+  };
+
   return (
 
     <main className="max-w-3xl m-auto p-2">
@@ -38,7 +47,13 @@ export default function App() {
         {loading && <Loader />}
         {!loading && <ClientsList clients={clients} />}
 
-        <AddClientBtn />
+        <AddClientBtn onClick={() => setIsModalOpen(true)} />
+        
+        {isModalOpen && (
+        <Modal title="Add new client" onClose={() => setIsModalOpen(false)}>
+          <ClientForm onClientCreated={handleCreateClient} />
+        </Modal>
+      )}
 
       </div>
     </main>
