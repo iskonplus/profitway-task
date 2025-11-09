@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { getClients, createClient } from './api/api';
+import { getClients, createClient, createProject } from './api/api';
 import ClientsList from './components/ClientList';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMsg';
 import AddClientBtn from './components/AddClientBtn'
 import Modal from './components/Modal';
 import ClientForm from './components/ClientForm'
-import ClientDetails from './components/ClientDetails';
 
 
 export default function App() {
@@ -41,6 +40,22 @@ export default function App() {
     setExpandedClientId((current) => (current === id ? null : id));
   };
 
+  const handleProjectAdded = async (clientId, payload) => {
+    const createdProject = await createProject(clientId, payload);
+
+    setClients((prev) =>
+      prev.map((client) =>
+        client.id === clientId
+          ? {
+            ...client,
+            projects: [...(client.projects ?? []), createdProject],
+          }
+          : client
+      )
+    );
+  };
+
+
   return (
 
     <main className="max-w-3xl m-auto p-2">
@@ -53,7 +68,9 @@ export default function App() {
         {loading && <Loader />}
         {!loading && <ClientsList clients={clients}
           expandedClientId={expandedClientId}
-          onToggleClient={handleToggleClient} />}
+          onToggleClient={handleToggleClient}
+          onProjectAdded={handleProjectAdded}
+        />}
 
 
         <AddClientBtn onClick={() => setIsModalOpen(true)} />

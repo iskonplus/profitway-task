@@ -1,6 +1,6 @@
 import ClientItem from "./ClientItem.jsx";
 
-export default function ClientList({ clients, expandedClientId, onToggleClient }) {
+export default function ClientList({ clients, expandedClientId, onToggleClient, onProjectAdded }) {
 
     if (clients.length === 0) {
         return <p className="text-gray-500 text-sm">No clients yet.</p>;
@@ -11,7 +11,9 @@ export default function ClientList({ clients, expandedClientId, onToggleClient }
             {clients.map((client) => (
                 <ClientItem key={client.id} client={client}
                     isExpanded={client.id === expandedClientId}
-                    onToggle={() => onToggleClient(client.id)} />
+                    onToggle={() => onToggleClient(client.id)}
+                    onProjectAdded={(payload) => onProjectAdded(client.id, payload)}
+                />
             ))}
         </ul>
     );

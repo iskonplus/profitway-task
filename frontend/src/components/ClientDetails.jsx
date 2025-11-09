@@ -1,4 +1,5 @@
-export default function ClientDetails({ client }) {
+import AddProjectForm from './AddProjectForm';
+export default function ClientDetails({ client, onProjectAdded }) {
     if (!client) return null;
 
     const projects = client.projects ?? [];
@@ -59,6 +60,12 @@ export default function ClientDetails({ client }) {
                     This client has no projects yet.
                 </p>
             )}
+
+            <div onClick={(e) => e.stopPropagation()}>
+             <AddProjectForm onProjectAdded={onProjectAdded} />
+
+            </div>
+
         </section>
     );
 }

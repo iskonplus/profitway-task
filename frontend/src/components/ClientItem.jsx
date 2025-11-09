@@ -1,6 +1,6 @@
 import ClientDetails from './ClientDetails';
 
-export default function ClientItem({ client, isExpanded, onToggle }) {
+export default function ClientItem({ client, isExpanded, onToggle, onProjectAdded }) {
     return (
         <li
             key={client.id}
@@ -10,6 +10,7 @@ export default function ClientItem({ client, isExpanded, onToggle }) {
       "
             onClick={onToggle}
         >
+
             <div
                 className="
           flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between
@@ -56,9 +57,10 @@ export default function ClientItem({ client, isExpanded, onToggle }) {
 
             {isExpanded && (
                 <div className="mt-3">
-                    <ClientDetails client={client} />
+                    <ClientDetails client={client} onProjectAdded={onProjectAdded} />
                 </div>
             )}
+
 
         </li>
     );
