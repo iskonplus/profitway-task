@@ -1,4 +1,5 @@
 import AddProjectForm from './AddProjectForm';
+import InfoRow from './InfoRow';
 export default function ClientDetails({ client, onProjectAdded }) {
     if (!client) return null;
 
@@ -43,16 +44,9 @@ export default function ClientDetails({ client, onProjectAdded }) {
 
                     </ul>
 
-                    <dl className="text-sm space-y-1 mt-3 flex justify-end mt-4">
-                        <div>
-                            <dt className="inline text-gray-500">
-                                Total value (PLN):{' '}
-                            </dt>
-                            <dd className="inline text-gray-900">
-                                {totalPLN}
-                            </dd>
-                        </div>
-                    </dl>
+                    <div className="text-sm space-y-1 mt-3 flex justify-end mt-4">
+                    <InfoRow label="Projects total (PLN):" value={totalPLN} />
+                    </div>
                 </>
 
             ) : (

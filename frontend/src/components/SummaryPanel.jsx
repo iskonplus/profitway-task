@@ -23,7 +23,7 @@ export default function SummaryPanel({ summary, loading, error }) {
             <div className="flex gap-2 text-sm justify-end">
 
                 <InfoRow label="Total projects:" value={totalProjects} />
-                <InfoRow label="Total value (PLN):" value={totalPLN} />
+                <InfoRow label="Overall total (PLN):" value={totalPLN} />
 
             </div>
         </section>
