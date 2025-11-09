@@ -1,5 +1,5 @@
 import ClientDetails from "./ClientDetails";
-import InfoRow from "./InfoRow";
+import InfoRow from "../InfoRow";
 
 export default function ClientItem({
     client,

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getClients, createClient, createProject, getSummary } from './api/api';
-import ClientsList from './components/ClientList';
+import ClientsList from './components/clients/ClientList';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMsg';
 import BtnRight from './components/buttons/BtnRight';
 import Modal from './components/Modal';
-import ClientForm from './components/ClientForm';
+import ClientForm from './components/clients/ClientForm';
 import SummaryPanel from './components/SummaryPanel';
 
 

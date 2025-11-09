@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import BtnRight from './buttons/BtnRight';
+import BtnRight from '../buttons/BtnRight';
 
 export default function ClientForm({ onClientCreated }) {
 

@@ -1,5 +1,5 @@
-import AddProjectForm from './AddProjectForm';
-import InfoRow from './InfoRow';
+import AddProjectForm from '../AddProjectForm';
+import InfoRow from '../InfoRow';
 export default function ClientDetails({ client, onProjectAdded }) {
     if (!client) return null;
 
