@@ -63,7 +63,6 @@ export default function ClientDetails({ client, onProjectAdded }) {
 
             <div onClick={(e) => e.stopPropagation()}>
              <AddProjectForm onProjectAdded={onProjectAdded} />
-
             </div>
 
         </section>

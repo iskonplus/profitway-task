@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import { getClients, createClient, createProject } from './api/api';
+import { getClients, createClient, createProject, getSummary } from './api/api';
 import ClientsList from './components/ClientList';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMsg';
-import BtnRight from './components/buttons/BtnRight'
+import BtnRight from './components/buttons/BtnRight';
 import Modal from './components/Modal';
-import ClientForm from './components/ClientForm'
+import ClientForm from './components/ClientForm';
+import SummaryPanel from './components/SummaryPanel';
 
 
 export default function App() {
@@ -14,19 +15,41 @@ export default function App() {
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedClientId, setExpandedClientId] = useState(null);
+
+  const [summary, setSummary] = useState(null);
+  const [summaryLoading, setSummaryLoading] = useState(false);
+  const [summaryError, setSummaryError] = useState('');
+
   const title = 'Mini CRM';
+
+  const fetchSummary = async () => {
+    try {
+      setSummaryLoading(true);
+      setSummaryError('');
+      const data = await getSummary();
+      setSummary(data);
+    } catch (err) {
+      setSummaryError(err.message || 'Failed to load summary');
+    } finally {
+      setSummaryLoading(false);
+    }
+
+  };
 
   useEffect(() => {
     (async () => {
       try {
         const data = await getClients();
+        const summaryData = await getSummary();
         setClients(data);
+        setSummary(summaryData);
 
       } catch (err) {
         setError(err.message || 'Failed to load clients');
       } finally {
         setLoading(false);
       }
+      await fetchSummary();
     })();
   }, []);
 
@@ -53,6 +76,7 @@ export default function App() {
           : client
       )
     );
+    await fetchSummary();
   };
 
 
@@ -71,6 +95,12 @@ export default function App() {
           onToggleClient={handleToggleClient}
           onProjectAdded={handleProjectAdded}
         />}
+
+        <SummaryPanel
+          summary={summary}
+          loading={summaryLoading}
+          error={summaryError}
+        />
 
 
         <BtnRight onClick={() => setIsModalOpen(true)} />
