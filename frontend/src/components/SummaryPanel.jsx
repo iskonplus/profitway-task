@@ -1,13 +1,9 @@
-import InfoRow  from './InfoRow'
+import InfoRow from './InfoRow';
+import Loader from './Loader';
 
 export default function SummaryPanel({ summary, loading, error }) {
-    if (loading) {
-        return (
-            <div className="mt-4 text-sm text-gray-500">
-                Loading summary...
-            </div>
-        );
-    }
+
+    if (loading) return <Loader />;
 
     if (error) {
         return (
