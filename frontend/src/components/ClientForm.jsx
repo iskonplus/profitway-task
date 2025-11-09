@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AddClientBtn from './AddClientBtn';
+import BtnRight from './buttons/BtnRight';
 
 export default function ClientForm({ onClientCreated }) {
 
@@ -53,7 +53,7 @@ export default function ClientForm({ onClientCreated }) {
         />
       </div>
 
-      <AddClientBtn/>
+      <BtnRight/>
     </form>
   );
 }

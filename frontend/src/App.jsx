@@ -3,7 +3,7 @@ import { getClients, createClient, createProject } from './api/api';
 import ClientsList from './components/ClientList';
 import Loader from './components/Loader';
 import ErrorMessage from './components/ErrorMsg';
-import AddClientBtn from './components/AddClientBtn'
+import BtnRight from './components/buttons/BtnRight'
 import Modal from './components/Modal';
 import ClientForm from './components/ClientForm'
 
@@ -73,7 +73,7 @@ export default function App() {
         />}
 
 
-        <AddClientBtn onClick={() => setIsModalOpen(true)} />
+        <BtnRight onClick={() => setIsModalOpen(true)} />
 
         {isModalOpen && (
           <Modal title="Add new client" onClose={() => setIsModalOpen(false)}>
