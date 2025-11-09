@@ -44,3 +44,14 @@ export async function createProject(clientId, payload) {
 
   return res.json();
 }
+
+export async function getSummary() {
+
+  const res = await fetch(`${API_BASE}/summary`);
+
+  if (!res.ok) {
+    throw new Error('Failed to load summary');
+  }
+
+  return res.json();
+}
