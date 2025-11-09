@@ -1,23 +1,22 @@
-import { useState } from 'react';
-import BtnRight from '../buttons/BtnRight';
+import { useState } from "react";
+import BtnRight from "../buttons/BtnRight";
 
 export default function ClientForm({ onClientCreated }) {
-
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!name || !email ) {
-      setError('All fields are required');
+    if (!name || !email) {
+      setError("All fields are required");
       return;
     }
 
     const payload = {
       name,
-      email
+      email,
     };
 
     onClientCreated(payload);
@@ -52,8 +51,7 @@ export default function ClientForm({ onClientCreated }) {
           className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#4B7F60]"
         />
       </div>
-
-      <BtnRight/>
+      <BtnRight />
     </form>
   );
 }

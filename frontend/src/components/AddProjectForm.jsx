@@ -1,25 +1,25 @@
-import { useState } from 'react';
-import BtnLeft from './buttons/BtnLeft';
+import { useState } from "react";
+import BtnLeft from "./buttons/BtnLeft";
 
 export default function AddProjectForm({ onProjectAdded }) {
   const [showForm, setShowForm] = useState(false);
-  const [projectName, setProjectName] = useState('');
-  const [status, setStatus] = useState('open');
-  const [valuePLN, setValuePLN] = useState('');
-  const [error, setError] = useState('');
+  const [projectName, setProjectName] = useState("");
+  const [status, setStatus] = useState("open");
+  const [valuePLN, setValuePLN] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!projectName || !status || !valuePLN) {
-      setError('All fields are required');
+      setError("All fields are required");
       return;
     }
 
     const valueNumber = Number(valuePLN);
     if (Number.isNaN(valueNumber) || valueNumber < 0) {
-      setError('Value must be a positive number');
+      setError("Value must be a positive number");
       return;
     }
 
@@ -29,25 +29,24 @@ export default function AddProjectForm({ onProjectAdded }) {
       valuePLN: valueNumber,
     });
 
-    setProjectName('');
-    setStatus('open');
-    setValuePLN('');
+    setProjectName("");
+    setStatus("open");
+    setValuePLN("");
     setShowForm(false);
   };
 
   return (
-      <div className="mt-3">
-
-          <BtnLeft onClick={() => setShowForm((prev) => !prev)}>{showForm ? 'Cancel' : 'Add project'}</BtnLeft>
+    <div className="mt-3">
+      <BtnLeft onClick={() => setShowForm((prev) => !prev)}>
+        {showForm ? "Cancel" : "Add project"}
+      </BtnLeft>
 
       {showForm && (
         <form
           onSubmit={handleSubmit}
           className="mt-3 space-y-2 text-sm bg-white border rounded p-3"
         >
-          {error && (
-            <p className="text-xs text-red-600">{error}</p>
-          )}
+          {error && <p className="text-xs text-red-600">{error}</p>}
 
           <div>
             <label className="block text-xs text-gray-600 mb-1">
@@ -62,9 +61,7 @@ export default function AddProjectForm({ onProjectAdded }) {
           </div>
 
           <div>
-            <label className="block text-xs text-gray-600 mb-1">
-              Status
-            </label>
+            <label className="block text-xs text-gray-600 mb-1">Status</label>
             <select
               value={status}
               onChange={(e) => setStatus(e.target.value)}
@@ -87,7 +84,7 @@ export default function AddProjectForm({ onProjectAdded }) {
               className="w-full border rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-emerald-500"
             />
           </div>
-            <BtnLeft>Save project</BtnLeft>
+          <BtnLeft>Save project</BtnLeft>
         </form>
       )}
     </div>

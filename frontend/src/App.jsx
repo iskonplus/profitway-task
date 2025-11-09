@@ -1,51 +1,46 @@
-import { useState, useEffect } from 'react';
-import { getClients, createClient, createProject, getSummary } from './api/api';
-import ClientsList from './components/clients/ClientList';
-import Loader from './components/Loader';
-import ErrorMessage from './components/ErrorMsg';
-import BtnRight from './components/buttons/BtnRight';
-import Modal from './components/Modal';
-import ClientForm from './components/clients/ClientForm';
-import SummaryPanel from './components/SummaryPanel';
-
+import { useState, useEffect } from "react";
+import { getClients, createClient, createProject, getSummary } from "./api/api";
+import ClientsList from "./components/clients/ClientList";
+import Loader from "./components/Loader";
+import ErrorMessage from "./components/ErrorMsg";
+import BtnRight from "./components/buttons/BtnRight";
+import Modal from "./components/Modal";
+import ClientForm from "./components/clients/ClientForm";
+import SummaryPanel from "./components/SummaryPanel";
 
 export default function App() {
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedClientId, setExpandedClientId] = useState(null);
 
   const [summary, setSummary] = useState(null);
   const [summaryLoading, setSummaryLoading] = useState(false);
-  const [summaryError, setSummaryError] = useState('');
+  const [summaryError, setSummaryError] = useState("");
 
-  const title = 'Mini CRM';
+  const title = "Mini CRM";
 
   const fetchSummary = async () => {
     try {
       setSummaryLoading(true);
-      setSummaryError('');
+      setSummaryError("");
       const data = await getSummary();
       setSummary(data);
     } catch (err) {
-      setSummaryError(err.message || 'Failed to load summary');
+      setSummaryError(err.message || "Failed to load summary");
     } finally {
       setSummaryLoading(false);
     }
-
   };
 
   useEffect(() => {
     (async () => {
       try {
         const data = await getClients();
-        const summaryData = await getSummary();
         setClients(data);
-        setSummary(summaryData);
-
       } catch (err) {
-        setError(err.message || 'Failed to load clients');
+        setError(err.message || "Failed to load clients");
       } finally {
         setLoading(false);
       }
@@ -70,38 +65,38 @@ export default function App() {
       prev.map((client) =>
         client.id === clientId
           ? {
-            ...client,
-            projects: [...(client.projects ?? []), createdProject],
-          }
+              ...client,
+              projects: [...(client.projects ?? []), createdProject],
+            }
           : client
       )
     );
     await fetchSummary();
   };
 
-
   return (
-
     <main className="max-w-3xl m-auto p-2">
-      <h1 className="text-2xl font-bold text-center mb-2 text-[#4B7F60]">{title}</h1>
-
+      <h1 className="text-2xl font-bold text-center mb-2 text-[#4B7F60]">
+        {title}
+      </h1>
 
       <div className="border-t bg-white shadow-md rounded-lg p-6 w-full space-y-6 m-auto">
-
         <ErrorMessage message={error} />
         {loading && <Loader />}
-        {!loading && <ClientsList clients={clients}
-          expandedClientId={expandedClientId}
-          onToggleClient={handleToggleClient}
-          onProjectAdded={handleProjectAdded}
-        />}
+        {!loading && (
+          <ClientsList
+            clients={clients}
+            expandedClientId={expandedClientId}
+            onToggleClient={handleToggleClient}
+            onProjectAdded={handleProjectAdded}
+          />
+        )}
 
         <SummaryPanel
           summary={summary}
           loading={summaryLoading}
           error={summaryError}
         />
-
 
         <BtnRight onClick={() => setIsModalOpen(true)} />
 
@@ -110,12 +105,7 @@ export default function App() {
             <ClientForm onClientCreated={handleCreateClient} />
           </Modal>
         )}
-
       </div>
     </main>
-
   );
-
 }
-
-
