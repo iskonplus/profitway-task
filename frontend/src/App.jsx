@@ -6,6 +6,7 @@ import ErrorMessage from './components/ErrorMsg';
 import AddClientBtn from './components/AddClientBtn'
 import Modal from './components/Modal';
 import ClientForm from './components/ClientForm'
+import ClientDetails from './components/ClientDetails';
 
 
 export default function App() {
@@ -13,6 +14,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [expandedClientId, setExpandedClientId] = useState(null);
   const title = 'Mini CRM';
 
   useEffect(() => {
@@ -35,6 +37,10 @@ export default function App() {
     setIsModalOpen(false);
   };
 
+  const handleToggleClient = (id) => {
+    setExpandedClientId((current) => (current === id ? null : id));
+  };
+
   return (
 
     <main className="max-w-3xl m-auto p-2">
@@ -45,15 +51,18 @@ export default function App() {
 
         <ErrorMessage message={error} />
         {loading && <Loader />}
-        {!loading && <ClientsList clients={clients} />}
+        {!loading && <ClientsList clients={clients}
+          expandedClientId={expandedClientId}
+          onToggleClient={handleToggleClient} />}
+
 
         <AddClientBtn onClick={() => setIsModalOpen(true)} />
-        
+
         {isModalOpen && (
-        <Modal title="Add new client" onClose={() => setIsModalOpen(false)}>
-          <ClientForm onClientCreated={handleCreateClient} />
-        </Modal>
-      )}
+          <Modal title="Add new client" onClose={() => setIsModalOpen(false)}>
+            <ClientForm onClientCreated={handleCreateClient} />
+          </Modal>
+        )}
 
       </div>
     </main>

@@ -1,39 +1,65 @@
-export default function ClientItem({ client }) {
+import ClientDetails from './ClientDetails';
+
+export default function ClientItem({ client, isExpanded, onToggle }) {
     return (
         <li
             key={client.id}
             className="
-        border-b py-4 px-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between
-        transition-colors duration-200 cursor-pointer
+        border-b py-4 px-2 transition-colors duration-200 cursor-pointer
         hover:bg-gray-100 hover:shadow-sm !mt-0
       "
+            onClick={onToggle}
         >
-            <div>
+            <div
+                className="
+          flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between
+        "
+            >
+                <div>
+                    <p className="text-sm text-gray-500">
+                        Company:{' '}
+                        <span className="font-semibold text-gray-900">
+                            {client.name}
+                        </span>
+                    </p>
 
-                <p className="text-sm text-gray-500">
-                    Company:{' '}
-                    <span className="font-semibold text-gray-900">{client.name}</span>
-                </p>
+                    <p className="text-sm text-gray-500 mt-1">
+                        Email:{' '}
+                        <span className="font-medium text-gray-800">
+                            {client.email}
+                        </span>
+                    </p>
+                </div>
 
-                <p className="text-sm text-gray-500 mt-1">
-                    Email:{' '}
-                    <span className="font-medium text-gray-800">{client.email}</span>
-                </p>
+                <div className="text-right sm:text-left">
+
+                    {client.acquiredAt && (
+                        <p className="text-xs text-gray-400">{client.acquiredAt}</p>
+                    )}
+
+                    {client.projects.length > 0 ? (
+                        <p className="text-sm text-gray-500 mt-2 sm:mt-0">
+                            Projects:{' '}
+                            <span className="font-semibold text-gray-900">
+                                {client.projects.length}
+                            </span>
+                        </p>
+                    ) : (
+                        <p className="text-sm text-gray-300 mt-2 sm:mt-0">
+                            No projects
+                        </p>
+                    )}
+
+
+                </div>
             </div>
 
-            <div>
-                <p className="text-xs text-gray-400">{client.acquiredAt}</p>
-                <p className="text-sm text-gray-500 mt-2 sm:mt-0">
-                    Projects:{' '}
-                    <span className="font-semibold text-gray-900">
-                        {client.projects?.length ?? 0}
-                    </span>
-                </p>
-            </div>
-
+            {isExpanded && (
+                <div className="mt-3">
+                    <ClientDetails client={client} />
+                </div>
+            )}
 
         </li>
-
     );
-
 }
