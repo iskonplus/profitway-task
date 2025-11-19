@@ -5,7 +5,7 @@ export default function ProjectList({ projects, onProjectDeleted }) {
       {projects.map((project) => (
         <li
           key={project.id}
-          className="bg-white border rounded-md px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 relative
+          className="group bg-white border rounded-md px-3 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1 relative
                     hover:scale-[102%] transition hover:shadow-lg
                     "
         >
@@ -25,6 +25,7 @@ export default function ProjectList({ projects, onProjectDeleted }) {
               e.stopPropagation();
               onProjectDeleted(project.id);
             }}
+            className="opacity-0 group-hover:opacity-100 transition-opacity"
           />
         </li>
       ))}
