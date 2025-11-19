@@ -6,6 +6,7 @@ export default function ClientItem({
   isExpanded,
   onToggle,
   onProjectAdded,
+  onProjectDeleted,
 }) {
   return (
     <li
@@ -41,7 +42,7 @@ export default function ClientItem({
 
       {isExpanded && (
         <div className="mt-3">
-          <ClientDetails client={client} onProjectAdded={onProjectAdded} />
+          <ClientDetails client={client} onProjectAdded={onProjectAdded} onProjectDeleted={onProjectDeleted} />
         </div>
       )}
     </li>

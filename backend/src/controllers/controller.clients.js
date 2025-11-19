@@ -62,6 +62,35 @@ export const clientsService = {
             send(res, 500, { message: errorMsg.server.internal });
         }
 
+    },
+    deleteProject: async (req, res) => {
+        try {
+            const { clientId, projectId } = req.params;
+
+            const client = await getClient(clientId);
+
+            if (!client) {
+                return send(res, 404, { message: errorMsg.notFound.client });
+            }
+
+            const projectIndex = client.projects.findIndex(
+                (p) => String(p.id) === String(projectId)
+            );
+
+            if (projectIndex === -1) {
+                return send(res, 404, { message: "project not found" });
+            }
+
+            client.projects.splice(projectIndex, 1);
+
+            const updatedClients = await updateClients(client, clientId);
+            await writeDB({ clients: updatedClients });
+
+            return send(res, 204, '');
+        } catch {
+            return send(res, 500, { message: errorMsg.server.internal });
+        }
+
     }
 
 }

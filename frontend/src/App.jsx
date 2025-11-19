@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { getClients, createClient, createProject, getSummary } from "./api/api";
+import {
+  getClients,
+  createClient,
+  createProject,
+  getSummary,
+  deleteProject,
+} from "./api/api";
 import ClientsList from "./components/clients/ClientList";
 import Loader from "./components/Loader";
 import ErrorMessage from "./components/ErrorMsg";
@@ -74,8 +80,30 @@ export default function App() {
     await fetchSummary();
   };
 
+  const handleProjectDeleted = async (clientId, projectId) => {
+    try {
+      await deleteProject(clientId, projectId);
+      setClients((prev) =>
+        prev.map((client) =>
+          client.id === clientId
+            ? {
+                ...client,
+                projects: (client.projects ?? []).filter(
+                  (p) => p.id !== projectId
+                ),
+              }
+            : client
+        )
+      );
+
+      await fetchSummary();
+    } catch (err) {
+      console.log(err.message || "Failed to delete project");
+    }
+  };
+
   return (
-    <main className="max-w-3xl m-auto p-2">
+    <main className="max-w-3xl m-auto p-2 ">
       <h1 className="text-2xl font-bold text-center mb-2 text-[#4B7F60]">
         {title}
       </h1>
@@ -89,6 +117,7 @@ export default function App() {
             expandedClientId={expandedClientId}
             onToggleClient={handleToggleClient}
             onProjectAdded={handleProjectAdded}
+            onProjectDeleted={handleProjectDeleted}
           />
         )}
 

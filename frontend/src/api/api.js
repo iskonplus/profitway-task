@@ -51,3 +51,15 @@ export async function getSummary() {
 
   return res.json();
 }
+
+export async function deleteProject(clientId, projectId) {
+  const res = await fetch(`${API_BASE}/clients/${clientId}/projects/${projectId}`, {
+    method: "DELETE"
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete project");
+  }
+
+  return true;
+}

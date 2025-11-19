@@ -3,10 +3,10 @@ export default function BtnClose({ onClick }) {
     <button
       type="button"
       onClick={onClick}
-      className="text-gray-500 hover:text-gray-800 text-xl leading-none"
+      className="text-gray-500 text-xl leading-none"
       aria-label="Close"
     >
-      <span className="hover:text-red-600 transition">×</span>
+      <span className="hover:text-gray-800 transition">×</span>
     </button>
   );
 }

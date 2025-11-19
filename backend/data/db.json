@@ -5,7 +5,14 @@
       "name": "Iskonplus Sp. z o.o.",
       "email": "Iskonplus@gmail.pl",
       "acquiredAt": "2024-10-03",
-      "projects": []
+      "projects": [
+        {
+          "id": "422c4661-aef5-4665-b6cb-36cad2465f41",
+          "name": "q",
+          "status": "open",
+          "valuePLN": 1111
+        }
+      ]
     },
     {
       "id": "74cda85c-87a7-4dc3-b31d-8e37f01dc9dc",
@@ -26,7 +33,7 @@
           "valuePLN": 100
         },
         {
-          "id": "362cfcbc-24be-4f1b-a20d-0a3c41bab947",
+          "id": "718aa1f1-b241-4cea-a672-02d9452d60af",
           "name": "Test",
           "status": "done",
           "valuePLN": 200
@@ -44,6 +51,12 @@
           "name": "SEO optimization",
           "status": "in progress",
           "valuePLN": 1200
+        },
+        {
+          "id": "b3021f97-debb-4106-9534-22985dc34412",
+          "name": "www",
+          "status": "open",
+          "valuePLN": 100
         }
       ]
     }
