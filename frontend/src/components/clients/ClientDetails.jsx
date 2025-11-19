@@ -12,11 +12,6 @@ export default function ClientDetails({ client, onProjectAdded, onProjectDeleted
     0
   );
 
-  // const handleProjectDeletedForClient = (projectId) => {
-  //   onProjectDeleted(client.id, projectId);
-  // }
-
-
   return (
     <section className="border rounded-lg p-4 bg-slate-50">
       <h2 className="text-base font-semibold mb-3 text-gray-800">
@@ -27,10 +22,7 @@ export default function ClientDetails({ client, onProjectAdded, onProjectDeleted
         <>
           <ProjectList
             projects={projects}
-            // onDeleteProject={handleProjectDeletedForClient}
-            // onProjectAdded={(payload) => onProjectAdded(client.id, payload)}
             onProjectDeleted={(projectId) => onProjectDeleted(client.id, projectId)}
-
           />
 
           <div className="text-sm space-y-1 flex justify-end mt-4">
