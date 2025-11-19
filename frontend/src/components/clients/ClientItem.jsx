@@ -1,5 +1,6 @@
 import ClientDetails from "./ClientDetails";
 import InfoRow from "../InfoRow";
+import BtnDelete from "../buttons/BtnDelete";
 
 export default function ClientItem({
   client,
@@ -7,13 +8,14 @@ export default function ClientItem({
   onToggle,
   onProjectAdded,
   onProjectDeleted,
+  onClientDeleted
 }) {
   return (
     <li
       key={client.id}
       className="
         border-b py-4 px-2 transition-colors duration-200 cursor-pointer
-        hover:bg-gray-100 hover:shadow-sm !mt-0
+        hover:bg-gray-100 hover:shadow-sm !mt-0 relative
       "
       onClick={onToggle}
     >
@@ -45,6 +47,7 @@ export default function ClientItem({
           <ClientDetails client={client} onProjectAdded={onProjectAdded} onProjectDeleted={onProjectDeleted} />
         </div>
       )}
+      <BtnDelete onClick={(e) => {e.stopPropagation(); onClientDeleted(client.id)}} />
     </li>
   );
 }

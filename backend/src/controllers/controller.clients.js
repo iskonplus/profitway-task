@@ -1,4 +1,4 @@
-import { createClientModel, findAllClients, send, getClient, createClientProject, updateClients } from '../utils.js';
+import { createClientModel, findAllClients, send, getClient, createClientProject, updateClients, deleteClient } from '../utils.js';
 import { errorMsg } from '../errors/errMsg.js';
 import { readDB, writeDB } from '../db.js'
 
@@ -62,6 +62,19 @@ export const clientsService = {
             send(res, 500, { message: errorMsg.server.internal });
         }
 
+    },   
+    deleteClient: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const client = await getClient(id);
+            if (!client) return send(res, 404, { message: errorMsg.notFound.client });
+            const newListClients = await deleteClient(id);
+            await writeDB({ clients: newListClients });
+            send(res, 204, '');
+        
+        } catch {
+            send(res, 500, { message: errorMsg.server.internal });
+        }
     },
     deleteProject: async (req, res) => {
         try {

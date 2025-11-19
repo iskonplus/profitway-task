@@ -63,3 +63,14 @@ export async function deleteProject(clientId, projectId) {
 
   return true;
 }
+export async function deleteClient(clientId) {
+  const res = await fetch(`${API_BASE}/clients/${clientId}`, {
+    method: "DELETE"
+  });
+
+  if (!res.ok) {
+    throw new Error("Failed to delete client");
+  }
+
+  return true;
+}

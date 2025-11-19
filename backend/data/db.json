@@ -1,16 +1,22 @@
 {
   "clients": [
     {
-      "id": "fe37f82f-b4e5-4397-b474-c0a6b180bc8f",
-      "name": "Iskonplus Sp. z o.o.",
-      "email": "Iskonplus@gmail.pl",
-      "acquiredAt": "2024-10-03",
+      "id": "ca6be60f-da7f-496a-8384-e61722498cba",
+      "name": "ISKONplus Sp. z.o.o",
+      "email": "iskonplus@test.pl",
+      "acquiredAt": "2025-11-19",
       "projects": [
         {
-          "id": "422c4661-aef5-4665-b6cb-36cad2465f41",
-          "name": "q",
+          "id": "6c18f687-4537-4a85-91cd-1627dd8c063a",
+          "name": "Open",
           "status": "open",
-          "valuePLN": 1111
+          "valuePLN": 1000
+        },
+        {
+          "id": "b27e1e96-67f7-4b03-a603-e5678223d8bb",
+          "name": "Test",
+          "status": "open",
+          "valuePLN": 100
         }
       ]
     },

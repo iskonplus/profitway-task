@@ -5,7 +5,8 @@ export default function ClientList({
   expandedClientId,
   onToggleClient,
   onProjectAdded,
-  onProjectDeleted
+  onProjectDeleted,
+  onClientDeleted
 }) {
   if (clients.length === 0) {
     return <p className="text-gray-500 text-sm">No clients yet.</p>;
@@ -21,6 +22,7 @@ export default function ClientList({
           onToggle={() => onToggleClient(client.id)}
           onProjectAdded={(payload) => onProjectAdded(client.id, payload)}
           onProjectDeleted={onProjectDeleted}
+          onClientDeleted={onClientDeleted}
         />
       ))}
     </ul>

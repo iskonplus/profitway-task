@@ -5,6 +5,7 @@ import {
   createProject,
   getSummary,
   deleteProject,
+  deleteClient
 } from "./api/api";
 import ClientsList from "./components/clients/ClientList";
 import Loader from "./components/Loader";
@@ -102,6 +103,16 @@ export default function App() {
     }
   };
 
+  const handleClientDeleted = async (clientId) => {
+    try {
+      await deleteClient(clientId);
+      setClients((prev) => prev.filter((client) => client.id !== clientId));
+      await fetchSummary();
+    } catch (err) {
+      console.log(err.message || "Failed to delete client");
+    }
+  };
+
   return (
     <main className="max-w-3xl m-auto p-2 ">
       <h1 className="text-2xl font-bold text-center mb-2 text-[#4B7F60]">
@@ -118,6 +129,7 @@ export default function App() {
             onToggleClient={handleToggleClient}
             onProjectAdded={handleProjectAdded}
             onProjectDeleted={handleProjectDeleted}
+            onClientDeleted={handleClientDeleted}
           />
         )}
 

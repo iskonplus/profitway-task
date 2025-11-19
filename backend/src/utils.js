@@ -49,3 +49,11 @@ export const calculateSummary = (clients) => {
         { totalProjects: 0, totalPLN: 0 }
     );
 }
+export const deleteClient = async (id) => {
+    const db = await readDB();
+    return db.clients.filter(client => client.id !== id);
+}
+// export const deleteProject = async (clientId, projectId) => {
+//     const db = await readDB();
+//     return db.clients.find(client => client.id === clientId).projects.filter(project => project.id !== projectId);
+// }
