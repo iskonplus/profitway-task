@@ -1,0 +1,70 @@
+{
+  "clients": [
+    {
+      "id": "ca6be60f-da7f-496a-8384-e61722498cba",
+      "name": "ISKONplus Sp. z.o.o",
+      "email": "iskonplus@test.pl",
+      "acquiredAt": "2025-11-19",
+      "projects": [
+        {
+          "id": "6c18f687-4537-4a85-91cd-1627dd8c063a",
+          "name": "Open",
+          "status": "open",
+          "valuePLN": 1000
+        },
+        {
+          "id": "b27e1e96-67f7-4b03-a603-e5678223d8bb",
+          "name": "Test",
+          "status": "open",
+          "valuePLN": 100
+        }
+      ]
+    },
+    {
+      "id": "74cda85c-87a7-4dc3-b31d-8e37f01dc9dc",
+      "name": "Acme Sp. z o.o.",
+      "email": "kontakt@acme.pl",
+      "acquiredAt": "2025-11-07",
+      "projects": [
+        {
+          "id": "10980d95-bdf0-4a04-b5f7-27d1d96e9867",
+          "name": "Website development",
+          "status": "open",
+          "valuePLN": 100
+        },
+        {
+          "id": "20980d95-bdf0-4a04-b5f7-27d1d96e9867",
+          "name": "Landing Page Redesign",
+          "status": "in progress",
+          "valuePLN": 100
+        },
+        {
+          "id": "718aa1f1-b241-4cea-a672-02d9452d60af",
+          "name": "Test",
+          "status": "done",
+          "valuePLN": 200
+        }
+      ]
+    },
+    {
+      "id": "74cda85c-87a7-4dc3-b31d-8e37f01dc9d9",
+      "name": "Super Sp. z o.o.",
+      "email": "kontakt@super.pl",
+      "acquiredAt": "2023-08-07",
+      "projects": [
+        {
+          "id": "40980d95-bdf0-4a04-b5f7-27d1d96e9867",
+          "name": "SEO optimization",
+          "status": "in progress",
+          "valuePLN": 1200
+        },
+        {
+          "id": "b3021f97-debb-4106-9534-22985dc34412",
+          "name": "www",
+          "status": "open",
+          "valuePLN": 100
+        }
+      ]
+    }
+  ]
+}

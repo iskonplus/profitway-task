@@ -1,0 +1,109 @@
+import { createClientModel, findAllClients, send, getClient, createClientProject, updateClients, deleteClient } from '../utils.js';
+import { errorMsg } from '../errors/errMsg.js';
+import { readDB, writeDB } from '../db.js'
+
+export const clientsService = {
+    getAll: async (_req, res) => {
+        try {
+            const clients = await findAllClients();
+            send(res, 200, clients);
+        } catch {
+            send(res, 500, errorMsg.server.internal);
+        }
+    },
+
+    getById: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const client = await getClient(id);
+            if (!client) return send(res, 404, { message: errorMsg.notFound.client });
+            send(res, 200, client);
+        } catch {
+            send(res, 500, { message: errorMsg.server.internal });
+        }
+    },
+
+    create: async (req, res) => {
+        try {
+            const { name, email } = req.body ?? {};
+            if (!name || !email) return send(res, 400, { message: errorMsg.invalid.required });
+
+            const db = await readDB();
+            const newClient = await createClientModel(name, email);
+
+            await writeDB({ clients: [newClient, ...db.clients] });
+            send(res, 201, newClient);
+
+        } catch (error) {
+            send(res, 500, { message: errorMsg.server.internal });
+        }
+
+    },
+    addProject: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { name, status, valuePLN } = req.body ?? {};
+
+            if (!name || !status || typeof valuePLN !== 'number') {
+                return send(res, 400, { message: errorMsg.invalid.required });
+            }
+
+            const client = await getClient(id);
+            if (!client) return send(res, 404, { message: errorMsg.notFound.client });
+
+            const project = await createClientProject(name, status, valuePLN);
+            client.projects.push(project);
+
+            const updatedClients = await updateClients(client, id);
+            await writeDB({ clients: updatedClients });
+
+            send(res, 201, project);
+        } catch {
+            send(res, 500, { message: errorMsg.server.internal });
+        }
+
+    },   
+    deleteClient: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const client = await getClient(id);
+            if (!client) return send(res, 404, { message: errorMsg.notFound.client });
+            const newListClients = await deleteClient(id);
+            await writeDB({ clients: newListClients });
+            send(res, 204, '');
+        
+        } catch {
+            send(res, 500, { message: errorMsg.server.internal });
+        }
+    },
+    deleteProject: async (req, res) => {
+        try {
+            const { clientId, projectId } = req.params;
+
+            const client = await getClient(clientId);
+
+            if (!client) {
+                return send(res, 404, { message: errorMsg.notFound.client });
+            }
+
+            const projectIndex = client.projects.findIndex(
+                (p) => String(p.id) === String(projectId)
+            );
+
+            if (projectIndex === -1) {
+                return send(res, 404, { message: "project not found" });
+            }
+
+            client.projects.splice(projectIndex, 1);
+
+            const updatedClients = await updateClients(client, clientId);
+            await writeDB({ clients: updatedClients });
+
+            return send(res, 204, '');
+        } catch {
+            return send(res, 500, { message: errorMsg.server.internal });
+        }
+
+    }
+
+}
